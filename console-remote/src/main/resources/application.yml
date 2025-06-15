@@ -1,0 +1,38 @@
+logging.level:
+  org.springframework: info
+    #transaction: info
+    #security: trace
+    #context.support.ResourceBundleMessageSource: DEBUG
+
+spring:
+  messages:
+    basename: fw-messages,application-messages
+    encoding: UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: "readinessState,db"
+      validate-group-membership: false # groupにindicatorが存在しない場合もエラーにしない設定
+
+rms:
+  debug:
+    configdump:
+      enable: true # change to true in the test class
+      #system-properties: on
+      #system-environment: on
+  application:
+    url: http://localhost:8080
+    format:
+      date: yyyyMMdd
+      date-time: yyyyMMdd HH:mm

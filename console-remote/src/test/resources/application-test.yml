@@ -1,0 +1,23 @@
+debug: false
+
+spring:
+  main:
+    banner-mode: off
+
+rms:
+  debug:
+    configdump:
+      enable: off
+      #system-properties: on
+      #system-environment: on
+  jwt-encode:
+    enable: true
+    private-key: classpath:/jwt.key
+    clock:
+      type: SYSTEM
+      fixed-datetime: 2024-01-01T12:30 # typeがSYSTEMの場合は無視される
+    claim:
+      issuer: JsonWebTokenIntegrationTest
+      exp: 60                 # 有効期限（分単位）
+  remote-stub:
+    image: "msa-spring-rms-remote-resources:0.0.1-SNAPSHOT"

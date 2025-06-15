@@ -1,0 +1,3 @@
+# The default JLineTextTerminal does not work in the Eclipse console,
+# so use ConsoleTextTerminal.
+org.beryx.textio.console.ConsoleTextTerminalProvider

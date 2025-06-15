@@ -1,0 +1,68 @@
+logging.level:
+  org.springframework: info
+    #transaction: info
+    #security: trace
+    #context.support.ResourceBundleMessageSource: DEBUG
+
+spring:
+  messages:
+    basename: fw-messages,application-messages
+    encoding: UTF-8
+  profiles:
+    group:
+      jpa-all: item-jpa,reservation-jpa,user-jpa
+      file-all: item-file,reservation-file,user-file
+    default: jpa-all
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      javax.persistence.validation.mode: NONE
+
+rms:
+  debug:
+    configdump:
+      enable: true # change to true in the test class
+      #system-properties: on
+      #system-environment: on
+  persistence:
+    item:
+      csv:
+        type: temporary
+        temporary:
+          resource: temporary/itemTemp.csv
+      sql:
+        schema-locations: classpath:sql/item-schema.sql
+        data-locations: classpath:sql/item-data.sql
+      remote:
+        url: http://localhost:${local.server.port}
+        format:
+          date: ${spring.mvc.format.date}
+          date-time: ${spring.mvc.format.date-time}
+    reservation:
+      csv:
+        type: temporary
+        temporary:
+          resource: temporary/reservationTemp.csv
+      sql:
+        schema-locations: classpath:sql/reservation-schema.sql
+        data-locations: classpath:sql/reservation-data.sql
+      remote:
+        url: http://localhost:${local.server.port}
+        format:
+          date: ${spring.mvc.format.date}
+          date-time: ${spring.mvc.format.date-time}
+    user:
+      csv:
+        type: temporary
+        temporary:
+          resource: temporary/userTemp.csv
+      sql:
+        schema-locations: classpath:sql/user-schema.sql
+        data-locations: classpath:sql/user-data.sql
+      remote:
+        url: http://localhost:${local.server.port}
+        format:
+          date: ${spring.mvc.format.date}
+          date-time: ${spring.mvc.format.date-time}

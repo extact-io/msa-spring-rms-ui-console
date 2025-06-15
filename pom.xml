@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.extact</groupId>
+        <artifactId>msa-spring-parent</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../msa-spring-parent/pom.xml</relativePath>
+    </parent>
+    <artifactId>msa-spring-rms-ui-console</artifactId>
+    <packaging>pom</packaging>
+    <name>msa-spring-rms-ui-console</name>
+    <description>RMS Console UI POM</description>
+    <dependencies>
+    </dependencies>
+    <modules>
+        <module>console-local</module>
+        <module>console-remote</module>
+        <module>console-core</module>
+    </modules>
+</project>
