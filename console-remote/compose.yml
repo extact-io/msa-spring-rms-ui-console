@@ -1,0 +1,26 @@
+# $ docker compose up
+services:
+  rms-application:
+    image: msa-spring-rms-application:0.0.1-SNAPSHOT
+    container_name: "rms-application"
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=item-file,reservation-jpa,user-remote
+      - RMS_PERSISTENCE_USER_REMOTE_URL=http://remote-resources:8081/remote
+    networks:
+      - spring-network
+  
+  remote-resource:
+    image: msa-spring-rms-remote-resources:0.0.1-SNAPSHOT
+    container_name: "remote-resources"
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=user
+    networks:
+      - spring-network
+
+networks:
+  spring-network:
+    driver: bridge
