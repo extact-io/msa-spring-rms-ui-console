@@ -34,7 +34,7 @@ public class RemoteServiceConfig {
     }
 
     @Bean
-    HttpServiceProxyFactory httpServiceProxyFactory(ExternalProperties prop, Environment env) {
+    HttpServiceProxyFactory httpServiceProxyFactory(RestClient.Builder builder, ExternalProperties prop, Environment env) {
 
         ConversionService conversionService = ConfigConversionServiceBuilder
                 .builder(prop)
@@ -48,7 +48,7 @@ public class RemoteServiceConfig {
                 .builder(prop)
                 .build();
 
-        RestClient restClient = RestClient.builder()
+        RestClient restClient = builder
                 .uriBuilderFactory(uriFactory)
                 .messageConverters(converters -> converters.addFirst(converter))
                 .requestInitializer(new BearerTokenRequestInitializer())

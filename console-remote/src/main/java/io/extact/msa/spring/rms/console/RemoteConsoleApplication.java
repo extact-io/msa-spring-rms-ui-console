@@ -1,7 +1,6 @@
 package io.extact.msa.spring.rms.console;
 
 import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Import;
@@ -10,6 +9,12 @@ import io.extact.msa.spring.platform.core.CoreConfig;
 import io.extact.msa.spring.rms.console.auth.ConsoleLoginContextConfig;
 import io.extact.msa.spring.rms.console.service.adapter.remote.RemoteServiceConfig;
 
+/**
+ * リモートコンソールアプリケーション。
+ * デフォルトのTerminal実装はEclipseから起動するときに標準入力がうまく動作しなくなるため
+ * <code>-Dorg.beryx.textio.TextTerminal=org.beryx.textio.console.ConsoleTextTerminal</code>
+ * を引数に指定する。
+ */
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @Import({
@@ -22,7 +27,7 @@ public class RemoteConsoleApplication {
     public static void main(String[] args) throws Exception {
         new SpringApplicationBuilder()
                 .sources(RemoteConsoleApplication.class)
-                .web(WebApplicationType.NONE)
+                //.web(WebApplicationType.NONE) // for actuator
                 .run(args);
     }
 }

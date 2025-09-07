@@ -13,8 +13,14 @@ import io.extact.msa.spring.rms.console.service.adapter.local.LocalServiceConfig
 import io.extact.msa.spring.rms.domain.DomainConfig;
 import io.extact.msa.spring.rms.infrastructure.persistence.PersistenceConfig;
 
-// localの場合はwebapiの@SpringBootConfigurationがクラスパスに
-// 含まれるため@Configurationを使っている
+/**
+ * ローカルアプリケーション。
+ * デフォルトのTerminal実装はEclipseから起動するときに標準入力がうまく動作しなくなるため
+ * <code>-Dorg.beryx.textio.TextTerminal=org.beryx.textio.console.ConsoleTextTerminal</code>
+ * を引数に指定する。<p>
+ * localの場合はwebapiの@SpringBootConfigurationがクラスパスに含まれる。クラスパス上に
+ * 2つの@SpringBootConfigurationが存在するとエラーとなるため@Configurationを使っている
+ */
 @Configuration
 @EnableAutoConfiguration
 @Import({

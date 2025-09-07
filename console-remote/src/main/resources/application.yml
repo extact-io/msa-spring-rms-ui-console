@@ -3,11 +3,15 @@ logging.level:
     #transaction: info
     #security: trace
     #context.support.ResourceBundleMessageSource: DEBUG
+  io.extact: debug
 
 spring:
   messages:
     basename: fw-messages,application-messages
     encoding: UTF-8
+
+server:
+  port: 9080 # for actuator
 
 management:
   endpoints:
@@ -24,6 +28,12 @@ management:
         readiness:
           include: "readinessState,db"
       validate-group-membership: false # groupにindicatorが存在しない場合もエラーにしない設定
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0  # 100%サンプリング（開発環境向け）
 
 rms:
   debug:

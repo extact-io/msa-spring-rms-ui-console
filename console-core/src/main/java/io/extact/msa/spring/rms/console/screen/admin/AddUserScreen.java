@@ -30,7 +30,7 @@ public class AddUserScreen implements RmsScreen {
         TextIoUtils.println(ENTRY_USER_INFORMATION);
 
         // ログインIDの入力
-        var loginId = TextIoUtils.newStringInputReader()
+        String loginId = TextIoUtils.newStringInputReader()
                 .withMinLength(5)
                 .withMaxLength(15)
                 .withExcludeCheckString(SCREEN_BREAK_KEY)
@@ -69,6 +69,7 @@ public class AddUserScreen implements RmsScreen {
                 .read("権限");
 
         UserConsoleModel command = UserConsoleModel.builder()
+                .loginId(loginId)
                 .password(password)
                 .userName(userName)
                 .phoneNumber(phoneNumber)

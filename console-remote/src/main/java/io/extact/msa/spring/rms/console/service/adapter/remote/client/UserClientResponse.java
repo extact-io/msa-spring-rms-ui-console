@@ -15,6 +15,7 @@ public record UserClientResponse(
     public UserConsoleModel toModel() {
         return UserConsoleModel.builder()
                 .id(this.id)
+                .loginId(this.loginId)
                 .password(this.password)
                 .userType(this.userType)
                 .userName(this.userName)

@@ -12,11 +12,29 @@
     <packaging>pom</packaging>
     <name>msa-spring-rms-ui-console</name>
     <description>RMS Console UI POM</description>
-    <dependencies>
-    </dependencies>
+
     <modules>
         <module>console-local</module>
         <module>console-remote</module>
         <module>console-core</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.extact</groupId>
+            <artifactId>msa-spring-test-lib</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.extact</groupId>
+            <artifactId>msa-spring-platform-fw-test-lib</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 </project>

@@ -11,8 +11,10 @@ import io.extact.msa.spring.rms.console.service.adapter.remote.client.RmsApplica
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.UserClientResponse;
 import io.extact.msa.spring.rms.console.service.model.UserConsoleModel;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
+@Slf4j
 public class RemoteLoginConsoleService implements LoginConsoleService {
 
     private final RmsApplicationClient client;
@@ -30,6 +32,7 @@ public class RemoteLoginConsoleService implements LoginConsoleService {
 
         UserClientResponse user = response.getBody();
         String bearerToken = BearerTokenExtractor.extract(response.getHeaders());
+        log.debug("received token:{}", bearerToken);
 
         LoggedInEvent event = LoggedInEvent.builder()
                 .userId(String.valueOf(user.id()))

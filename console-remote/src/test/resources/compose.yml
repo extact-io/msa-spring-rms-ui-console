@@ -2,22 +2,25 @@
 services:
   rms-application:
     image: msa-spring-rms-application:0.0.1-SNAPSHOT
-    container_name: "rms-application"
-    ports:
-      - "8080:8080"
     environment:
       - SPRING_PROFILES_ACTIVE=item-file,reservation-jpa,user-remote
-      - RMS_PERSISTENCE_USER_REMOTE_URL=http://remote-resources:8081/remote
+      - RMS_PERSISTENCE_USER_REMOTE_URL=http://rms-remote:8081/remote
+      - RMS_HEALTH_DEPEND_SERVICES=http://rms-remote:8081/actuator/health/readiness
+      - LANG=ja_JP.UTF-8
+      - LANGUAGE=ja_JP:ja
+      - LC_ALL=ja_JP.UTF-8
+      - TZ=Asia/Tokyo
     networks:
       - spring-network
-  
-  remote-resource:
+
+  rms-remote:
     image: msa-spring-rms-remote-resources:0.0.1-SNAPSHOT
-    container_name: "remote-resources"
-    ports:
-      - "8081:8081"
     environment:
       - SPRING_PROFILES_ACTIVE=user
+      - LANG=ja_JP.UTF-8
+      - LANGUAGE=ja_JP:ja
+      - LC_ALL=ja_JP.UTF-8
+      - TZ=Asia/Tokyo
     networks:
       - spring-network
 
