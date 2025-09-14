@@ -12,9 +12,11 @@ import io.extact.msa.spring.rms.console.service.adapter.remote.client.UserClient
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.UserUpdateClientRequest;
 import io.extact.msa.spring.rms.console.service.model.ItemConsoleModel;
 import io.extact.msa.spring.rms.console.service.model.UserConsoleModel;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Observed(name = "rms-console-remote", contextualName = "AdminConsoleService")
 public class RemoteAdminConsoleService implements AdminConsoleService {
 
     private final RmsApplicationClient client;

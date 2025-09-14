@@ -10,9 +10,11 @@ import io.extact.msa.spring.rms.console.service.adapter.remote.client.ReserveIte
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.RmsApplicationClient;
 import io.extact.msa.spring.rms.console.service.model.ItemConsoleModel;
 import io.extact.msa.spring.rms.console.service.model.MemberReservationConsoleModel;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Observed(name = "rms-console-remote", contextualName = "MemberConsoleService")
 public class RemoteMemberConsoleService implements MemberConsoleService {
 
     private final RmsApplicationClient client;

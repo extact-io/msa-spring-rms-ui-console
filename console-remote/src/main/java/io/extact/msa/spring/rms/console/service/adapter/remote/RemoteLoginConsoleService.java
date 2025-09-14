@@ -10,11 +10,13 @@ import io.extact.msa.spring.rms.console.service.adapter.remote.client.LoginClien
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.RmsApplicationClient;
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.UserClientResponse;
 import io.extact.msa.spring.rms.console.service.model.UserConsoleModel;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
+@Observed(name = "rms-console-remote", contextualName = "LoginConsoleService")
 public class RemoteLoginConsoleService implements LoginConsoleService {
 
     private final RmsApplicationClient client;
