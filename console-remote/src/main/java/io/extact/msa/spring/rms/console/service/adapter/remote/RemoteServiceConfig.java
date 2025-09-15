@@ -1,5 +1,7 @@
 package io.extact.msa.spring.rms.console.service.adapter.remote;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +24,8 @@ import io.extact.msa.spring.platform.fw.infrastructure.external.RestClientErrorH
 import io.extact.msa.spring.platform.fw.infrastructure.external.converter.ConfigConversionServiceBuilder;
 import io.extact.msa.spring.platform.fw.infrastructure.external.converter.ConfigMessageConveterBuilder;
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.RmsApplicationClient;
+import io.micrometer.observation.ObservationRegistry;
+import io.micrometer.observation.aop.ObservedAspect;
 
 @Configuration(proxyBeanMethods = false)
 @Import(EventPublisherConfig.class)
@@ -89,5 +93,12 @@ public class RemoteServiceConfig {
             DomainEventPublisher eventPublisher) {
 
         return new RemoteMemberConsoleService(client);
+    }
+
+    @Bean
+    @ConditionalOnClass(ObservedAspect.class)
+    @ConditionalOnProperty(name = "env.otlp.enabled", havingValue = "true")
+    ObservedAspect observedAspect(ObservationRegistry observationRegistry) {
+        return new ObservedAspect(observationRegistry);
     }
 }
