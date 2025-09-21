@@ -8,10 +8,12 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 import io.extact.msa.spring.platform.core.CoreConfig;
 import io.extact.msa.spring.platform.fw.exception.BusinessFlowException;
@@ -25,6 +27,7 @@ import io.extact.msa.spring.rms.console.service.model.ConsoleUserType;
 import io.extact.msa.spring.rms.console.service.model.UserConsoleModel;
 
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
+@ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class)
 public class CientScenarioTest {
 
@@ -36,11 +39,12 @@ public class CientScenarioTest {
     private MemberConsoleService memberService;
 
     @Configuration(proxyBeanMethods = false)
+    @EnableAutoConfiguration
     @Import({
-        TestcontainersConfig.class,
-        CoreConfig.class,
-        ConsoleLoginContextConfig.class,
-        RemoteServiceConfig.class })
+            TestcontainersConfig.class,
+            CoreConfig.class,
+            ConsoleLoginContextConfig.class,
+            RemoteServiceConfig.class })
     static class TestConfig {
     }
 
