@@ -1,6 +1,8 @@
+debug: true
+
 env:
   otlp:
-    enabled: false
+    enabled: true
 
 logging.level:
   org.springframework: info

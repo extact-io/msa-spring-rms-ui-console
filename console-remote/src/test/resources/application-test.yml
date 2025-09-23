@@ -2,7 +2,7 @@ debug: true
 
 env:
   otlp:
-    enabled: false # テストはOTELは無効なのを前提にしているためfalse固定すること
+    enabled: true # テストはOTELは無効なのを前提にしているためfalse固定すること
 
 spring:
   main:
