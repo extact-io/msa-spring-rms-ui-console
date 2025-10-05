@@ -14,3 +14,5 @@ rms:
       enable: false
       #system-properties: on
       #system-environment: on
+  test:
+    use-testcontainer: false

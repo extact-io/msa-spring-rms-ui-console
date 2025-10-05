@@ -3,6 +3,7 @@ package io.extact.msa.spring.rms.console;
 import java.io.IOException;
 import java.time.Duration;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
@@ -14,6 +15,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import lombok.extern.slf4j.Slf4j;
 
 @TestConfiguration(proxyBeanMethods = false)
+@ConditionalOnProperty(name = "rms.test.use-testcontainer", havingValue = "true")
 @Slf4j
 class TestcontainersConfig {
 
