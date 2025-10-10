@@ -225,4 +225,90 @@ class ClientScenarioTest {
         // 該当の予約が登録した予約と同じであること
         assertThat(reservations.get(0)).isEqualTo(reserved);
     }
+
+    @Test
+    @Order(4)
+    void reserveOnNotExistsScenario() {
+
+        // -----------------------------------
+        // 誤ったレンタル品IDで登録
+        // -----------------------------------
+
+        LocalDateTime fromDateTime = LocalDateTime.now().plusDays(10).truncatedTo(ChronoUnit.MINUTES);
+        LocalDateTime toDateTime = fromDateTime.plusDays(1);
+        String note = "備考";
+        MemberReservationConsoleModel reserveRequest = MemberReservationConsoleModel.builder()
+                .fromDateTime(fromDateTime)
+                .toDateTime(toDateTime)
+                .note(note)
+                .itemId(999) //存在しないID
+                .build();
+
+        BusinessFlowException thrown = assertThrows(BusinessFlowException.class, () -> {
+            memberService.reserveItem(reserveRequest);
+        });
+        assertThat(thrown.getCauseType()).isEqualTo(CauseType.NOT_FOUND);
+    }
+
+    @Test
+    @Order(5)
+    void cancelReservationScenario() {
+
+        // -----------------------------------
+        // @Order(3)で登録した予約をキャンセルできるか
+        // -----------------------------------
+
+        // ログインユーザの予約一覧を取得
+        List<MemberReservationConsoleModel> ownReservations = memberService.getOwnReservations();
+        // 該当の予約が1件であること
+        assertThat(ownReservations).hasSize(1);
+
+        // ログインユーザ以外の予約を削除
+        BusinessFlowException thrown = assertThrows(BusinessFlowException.class, () -> {
+            memberService.cancelReservation(1);
+        });
+        assertThat(thrown.getCauseType()).isEqualTo(CauseType.FORBIDDEN);
+
+        // キャンセル対象の予約を取得
+        MemberReservationConsoleModel cancelTarget = ownReservations.get(0);
+        // キャンセルの実行
+        memberService.cancelReservation(cancelTarget.id());
+
+        // 再度ログインユーザの予約一覧を取得
+        ownReservations = memberService.getOwnReservations();
+        // 自分の予約一覧に出てなこないこと
+        assertThat(ownReservations).isEmpty();
+    }
+
+    @Test
+    @Order(6)
+    void updateUserAccountScenario() {
+
+        // -----------------------------------
+        // ユーザ情報を更新できるか
+        // -----------------------------------
+        // ★:ADMINに切り替え
+        loginService.login("admin", "admin");
+
+        // 一覧を取得
+        List<UserConsoleModel> users = adminService.getAllUsers();
+        assertThat(users).hasSize(4);
+
+        // 一覧から更新対象を選択
+        UserConsoleModel updateTarget = users.get(0);
+        // ユーザ名を変更
+        UserConsoleModel updateRequest = UserConsoleModel.builder()
+                .id(updateTarget.id())
+                .loginId(updateTarget.loginId())
+                .password(updateTarget.password())
+                .userName("UPDATE")
+                .contact(updateTarget.contact())
+                .phoneNumber(updateTarget.phoneNumber())
+                .userType(updateTarget.userType())
+                .build();
+
+        // 更新の実行
+        UserConsoleModel actual = adminService.updateUser(updateRequest);
+        assertThat(actual).isEqualTo(updateRequest);
+    }
 }
