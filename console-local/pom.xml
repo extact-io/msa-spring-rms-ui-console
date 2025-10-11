@@ -16,11 +16,16 @@
 
         <dependency>
             <groupId>io.extact</groupId>
+            <artifactId>msa-spring-rms-ui-console-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.extact</groupId>
             <artifactId>msa-spring-rms-application</artifactId>
         </dependency>
         <dependency>
             <groupId>io.extact</groupId>
-            <artifactId>msa-spring-rms-ui-console-core</artifactId>
+            <artifactId>msa-spring-rms-ui-console-test</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

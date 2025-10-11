@@ -12,9 +12,11 @@ import io.extact.msa.spring.rms.console.service.model.MemberReservationConsoleMo
 import io.extact.msa.spring.rms.domain.item.model.ItemId;
 import io.extact.msa.spring.rms.domain.reservation.model.ReservationId;
 import io.extact.msa.spring.rms.domain.reservation.model.ReservationPeriod;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Observed(name = "rms-console-local", contextualName = "MemberConsoleService")
 public class LocalMemberConsoleService implements MemberConsoleService {
 
     private final ReserveItemService service;
@@ -55,7 +57,7 @@ public class LocalMemberConsoleService implements MemberConsoleService {
         ReserveItemCommand command = ReserveItemCommand.builder()
                 .period(new ReservationPeriod(model.fromDateTime(), model.toDateTime()))
                 .note(model.note())
-                .itemId(new ItemId(model.id()))
+                .itemId(new ItemId(model.itemId()))
                 .build();
         return service.reserve(command).transform(ModelConverter::fromReservationComposeModel);
     }

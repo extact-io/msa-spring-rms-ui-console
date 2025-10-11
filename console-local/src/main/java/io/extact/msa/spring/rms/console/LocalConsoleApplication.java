@@ -41,7 +41,7 @@ public class LocalConsoleApplication {
                  *  - application-local.ymlが優先されrms-application.jarのapplication.ymlは
                  *    読み込まれなくなる
                  */
-                .properties("spring.config.name:application-local")
+                .properties("spring.config.name=application-local")
                 .sources(LocalConsoleApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args);

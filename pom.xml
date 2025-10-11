@@ -14,9 +14,10 @@
     <description>RMS Console UI POM</description>
 
     <modules>
+        <module>console-core</module>
         <module>console-local</module>
         <module>console-remote</module>
-        <module>console-core</module>
+        <module>console-test</module>
     </modules>
 
     <dependencies>

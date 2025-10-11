@@ -5,9 +5,11 @@ import io.extact.msa.spring.rms.application.universal.LoginService;
 import io.extact.msa.spring.rms.console.auth.LoggedInEvent;
 import io.extact.msa.spring.rms.console.service.LoginConsoleService;
 import io.extact.msa.spring.rms.console.service.model.UserConsoleModel;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Observed(name = "rms-console-local", contextualName = "LoginConsoleService")
 public class LocalLoginConsoleService implements LoginConsoleService {
 
     private final LoginService service;

@@ -12,11 +12,14 @@ import io.extact.msa.spring.rms.console.auth.UserUpdatedEvent;
 import io.extact.msa.spring.rms.console.service.AdminConsoleService;
 import io.extact.msa.spring.rms.console.service.model.ItemConsoleModel;
 import io.extact.msa.spring.rms.console.service.model.UserConsoleModel;
+import io.extact.msa.spring.rms.domain.user.model.UserId;
 import io.extact.msa.spring.rms.domain.user.model.UserModelView;
 import io.extact.msa.spring.rms.domain.user.model.UserType;
+import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+@Observed(name = "rms-console-local", contextualName = "AdminConsoleService")
 public class LocalAdminConsoleService implements AdminConsoleService {
 
     private final ItemAdminService itemService;
@@ -60,6 +63,7 @@ public class LocalAdminConsoleService implements AdminConsoleService {
     public UserConsoleModel updateUser(UserConsoleModel model) {
 
         UserUpdateCommand command = UserUpdateCommand.builder()
+                .id(new UserId(model.id()))
                 .password(model.password())
                 .userName(model.userName())
                 .phoneNumber(model.phoneNumber())
