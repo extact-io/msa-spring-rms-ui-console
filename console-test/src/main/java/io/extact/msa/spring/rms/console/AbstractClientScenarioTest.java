@@ -106,7 +106,7 @@ abstract class AbstractClientScenarioTest {
 
     @Test
     @Order(2)
-    void addRentalScenario() {
+    void addItemScenario() {
 
         // -----------------------------------
         // レンタル品の登録

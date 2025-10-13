@@ -3,7 +3,7 @@ services:
   rms-application:
     image: msa-spring-rms-application:0.0.1-SNAPSHOT
     environment:
-      - SPRING_PROFILES_ACTIVE=item-jpa,reservation-jpa,user-jpa
+      - SPRING_PROFILES_ACTIVE=item-jpa,reservation-jpa,user-remote
       - RMS_PERSISTENCE_USER_REMOTE_URL=http://rms-remote:8081/remote
       - RMS_HEALTH_DEPEND_SERVICES=http://rms-remote:8081/actuator/health/readiness
       - RMS_DEBUG_CONFIGDUMP_ENABLE=false
