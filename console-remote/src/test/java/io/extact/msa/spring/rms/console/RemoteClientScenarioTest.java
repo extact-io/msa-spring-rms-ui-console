@@ -17,7 +17,7 @@ import io.extact.msa.spring.rms.console.service.adapter.remote.RemoteServiceConf
 @SpringBootTest(webEnvironment = WebEnvironment.NONE)
 @ActiveProfiles("test")
 @TestMethodOrder(OrderAnnotation.class)
-@AutoConfigureObservability
+@AutoConfigureObservability // SpringBootTestの機能でOFFされるので手動ONにする
 class RemoteClientScenarioTest extends AbstractClientScenarioTest {
 
     @Configuration(proxyBeanMethods = false)

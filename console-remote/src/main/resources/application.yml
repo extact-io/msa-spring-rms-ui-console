@@ -1,5 +1,3 @@
-debug: true
-
 env:
   otlp:
     enabled: true
@@ -22,6 +20,9 @@ server:
   port: 9080 # for actuator
 
 rms:
+  log:
+    access:
+      enable: false
   debug:
     configdump:
       enable: true # change to true in the test class
