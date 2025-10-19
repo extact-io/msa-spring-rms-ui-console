@@ -21,7 +21,7 @@ public interface ModelFormatter<T> {
     static class ReservationFormatter implements ModelFormatter<MemberReservationConsoleModel> {
         @Override
         public String format(MemberReservationConsoleModel model) {
-            return String.format("[%s] %s - %s %s %s %s",
+            return String.format("[%s] %s - %s %s %s",
                     model.id(),
                     ClientConstants.DATETIME_FORMAT.format(model.fromDateTime()),
                     ClientConstants.DATETIME_FORMAT.format(model.toDateTime()),

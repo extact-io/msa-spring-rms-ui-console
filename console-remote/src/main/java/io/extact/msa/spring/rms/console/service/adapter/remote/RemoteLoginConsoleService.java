@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-@Observed(name = "rms-console-remote", contextualName = "LoginConsoleService")
+@Observed(name = "rms-console-remote")
 public class RemoteLoginConsoleService implements LoginConsoleService {
 
     private final RmsApplicationClient client;
