@@ -16,7 +16,7 @@ import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Observed(name = "rms-console-local", contextualName = "MemberConsoleService")
+@Observed(name = "rms-console-local")
 public class LocalMemberConsoleService implements MemberConsoleService {
 
     private final ReserveItemService service;

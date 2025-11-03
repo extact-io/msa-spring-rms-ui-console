@@ -16,7 +16,7 @@ import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Observed(name = "rms-console-remote", contextualName = "AdminConsoleService")
+@Observed(name = "rms-console-remote")
 public class RemoteAdminConsoleService implements AdminConsoleService {
 
     private final RmsApplicationClient client;

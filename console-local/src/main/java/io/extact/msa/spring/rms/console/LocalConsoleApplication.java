@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import io.extact.msa.spring.platform.core.CoreConfig;
+import io.extact.msa.spring.platform.fw.feature.observation.ObservationConfig;
 import io.extact.msa.spring.rms.application.ApplicationServiceConfig;
 import io.extact.msa.spring.rms.console.auth.ConsoleLoginContextConfig;
 import io.extact.msa.spring.rms.console.service.adapter.local.LocalServiceConfig;
@@ -26,6 +27,7 @@ import io.extact.msa.spring.rms.infrastructure.persistence.PersistenceConfig;
 @Import({
         CoreConfig.class,
         ConsoleLoginContextConfig.class,
+        ObservationConfig.class,
         MainScreenConfig.class,
         LocalServiceConfig.class,
         ApplicationServiceConfig.class,

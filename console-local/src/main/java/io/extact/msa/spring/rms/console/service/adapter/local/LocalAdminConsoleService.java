@@ -19,7 +19,7 @@ import io.micrometer.observation.annotation.Observed;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Observed(name = "rms-console-local", contextualName = "AdminConsoleService")
+@Observed(name = "rms-console-local")
 public class LocalAdminConsoleService implements AdminConsoleService {
 
     private final ItemAdminService itemService;

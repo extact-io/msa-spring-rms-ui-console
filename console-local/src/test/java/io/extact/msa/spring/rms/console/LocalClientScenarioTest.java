@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import io.extact.msa.spring.platform.core.CoreConfig;
+import io.extact.msa.spring.platform.fw.feature.observation.ObservationConfig;
 import io.extact.msa.spring.rms.application.ApplicationServiceConfig;
 import io.extact.msa.spring.rms.console.auth.ConsoleLoginContextConfig;
 import io.extact.msa.spring.rms.console.service.adapter.local.LocalServiceConfig;
@@ -28,6 +29,7 @@ class LocalClientScenarioTest extends AbstractClientScenarioTest {
     @Import({
             CoreConfig.class,
             ConsoleLoginContextConfig.class,
+            ObservationConfig.class,
             LocalServiceConfig.class,
             ApplicationServiceConfig.class,
             DomainConfig.class,
