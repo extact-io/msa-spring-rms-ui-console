@@ -1,8 +1,8 @@
-debug: true
+debug: false
 
 env:
   otlp:
-    enabled: true # テストはOTELは無効なのを前提にしているためfalse固定すること
+    enabled: false # テストはOTELは無効なのを前提にしているためfalse固定すること
 spring:
   main:
     banner-mode: off
