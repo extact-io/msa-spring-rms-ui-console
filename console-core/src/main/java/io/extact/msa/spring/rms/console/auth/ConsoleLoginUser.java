@@ -2,7 +2,7 @@ package io.extact.msa.spring.rms.console.auth;
 
 import java.util.Set;
 
-import io.extact.msa.spring.platform.core.auth.LoginUser;
+import io.extact.msa.spring.platform.core.auth.user.LoginUser;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
