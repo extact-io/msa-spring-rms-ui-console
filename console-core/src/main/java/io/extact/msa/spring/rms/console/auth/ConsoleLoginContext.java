@@ -26,16 +26,17 @@ public class ConsoleLoginContext implements LoginContext {
         return (ConsoleLoginUser) auth.getLoginUser();
     }
 
-
     // -------------------------------------------------------------- event listener
 
     @EventListener
     void setRmsAuthenticationToContext(LoggedInEvent event) {
+
         RmsClientAuthenticationToken clientAuth = RmsClientAuthenticationToken.builder()
                 .userId(event.userId())
                 .groups(Set.of(event.roleName()))
                 .bearerToken(event.bearerToken())
-                .loginUserCreator(loginUser -> new ConsoleLoginUser(loginUser, event.loginId(), event.userName()))
+                .loginUserCreator(
+                        loginUser -> new ConsoleLoginUser(loginUser, event.loginId(), event.userName()))
                 .build();
         SecurityContextHolder.setContext(new SecurityContextImpl(clientAuth));
     }
