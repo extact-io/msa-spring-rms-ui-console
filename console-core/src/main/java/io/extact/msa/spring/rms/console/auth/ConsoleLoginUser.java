@@ -4,7 +4,7 @@ import java.util.Set;
 
 import io.extact.msa.spring.platform.core.auth.user.AuthUserId;
 import io.extact.msa.spring.platform.core.auth.user.LoginUser;
-import io.extact.msa.spring.platform.core.auth.user.UserAttributes;
+import io.extact.msa.spring.platform.core.auth.user.LoginUserAttributes;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -33,7 +33,7 @@ public class ConsoleLoginUser implements LoginUser {
     }
 
     @Override
-    public <T extends UserAttributes> T getAttributes(Class<T> clazz) {
+    public <T extends LoginUserAttributes> T getAttributes(Class<T> clazz) {
         throw new UnsupportedOperationException();
     }
 }

@@ -6,10 +6,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 
+import io.extact.msa.spring.platform.core.auth.RmsAuthentication;
 import io.extact.msa.spring.platform.core.auth.anonymous.RmsAnonymousAuthenticationToken;
 import io.extact.msa.spring.platform.core.auth.client.RmsClientAuthenticationToken;
 import io.extact.msa.spring.platform.core.auth.context.LoginContext;
-import io.extact.msa.spring.platform.core.auth.user.RmsAuthentication;
 
 public class ConsoleLoginContext implements LoginContext {
 
