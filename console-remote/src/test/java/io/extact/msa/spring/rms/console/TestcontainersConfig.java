@@ -20,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 class TestcontainersConfig {
 
     @Bean
+    @SuppressWarnings("resource")
     ComposeContainer composeContainer(Environment env) throws IOException {
         return new ComposeContainer(new ClassPathResource("compose.yml").getFile())
                 // コンテナ内の rms-application-1 の 8080ポートをホスト側に公開する
