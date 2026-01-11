@@ -3,11 +3,11 @@ package io.extact.msa.spring.rms.console.service.adapter.remote;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.ConversionService;
-import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
@@ -38,19 +38,22 @@ public class RemoteServiceConfig {
     }
 
     @Bean
-    HttpServiceProxyFactory httpServiceProxyFactory(RestClient.Builder builder, ExternalProperties prop, Environment env) {
+    HttpServiceProxyFactory httpServiceProxyFactory(
+            RestClient.Builder builder,
+            ExternalProperties prop,
+            ApplicationContext context) {
 
         ConversionService conversionService = ConfigConversionServiceBuilder
                 .builder(prop)
                 .build();
         UriBuilderFactory uriFactory = CustomUriBuilderFactory.newInstance()
-                .env(env)
+                .env(context.getEnvironment())
                 .conversionService(conversionService)
                 .uriTemplate(prop.getUrl())
                 .build();
         HttpMessageConverter<Object> converter = ConfigMessageConveterBuilder
                 .builder(prop)
-                .build();
+                .build(context);
 
         RestClient restClient = builder
                 .uriBuilderFactory(uriFactory)
