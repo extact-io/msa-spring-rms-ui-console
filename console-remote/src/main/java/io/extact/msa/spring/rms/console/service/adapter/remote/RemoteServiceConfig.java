@@ -3,32 +3,25 @@ package io.extact.msa.spring.rms.console.service.adapter.remote;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.client.support.RestClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
-import org.springframework.web.util.UriBuilderFactory;
 
-import io.extact.msa.spring.platform.core.auth.client.BearerTokenRequestInitializer;
 import io.extact.msa.spring.platform.fw.domain.event.DomainEventPublisher;
 import io.extact.msa.spring.platform.fw.feature.event.EventPublisherConfig;
-import io.extact.msa.spring.platform.fw.infrastructure.external.CustomUriBuilderFactory;
-import io.extact.msa.spring.platform.fw.infrastructure.external.ErrorMessageDeserializer;
 import io.extact.msa.spring.platform.fw.infrastructure.external.ExternalProperties;
-import io.extact.msa.spring.platform.fw.infrastructure.external.RestClientErrorHandler;
-import io.extact.msa.spring.platform.fw.infrastructure.external.converter.ConfigConversionServiceBuilder;
-import io.extact.msa.spring.platform.fw.infrastructure.external.converter.ConfigMessageConveterBuilder;
+import io.extact.msa.spring.platform.fw.infrastructure.external.customizer.BearerTokenRequestInitializerCustomizer;
+import io.extact.msa.spring.platform.fw.infrastructure.external.customizer.RmsRestClientCustomizer;
+import io.extact.msa.spring.platform.fw.infrastructure.external.customizer.SingleRestClientConfig;
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.RmsApplicationClient;
 import io.micrometer.observation.ObservationRegistry;
 import io.micrometer.observation.aop.ObservedAspect;
 
 @Configuration(proxyBeanMethods = false)
-@Import(EventPublisherConfig.class)
+@Import({
+        SingleRestClientConfig.class,
+        EventPublisherConfig.class })
 public class RemoteServiceConfig {
 
     @Bean
@@ -38,35 +31,8 @@ public class RemoteServiceConfig {
     }
 
     @Bean
-    HttpServiceProxyFactory httpServiceProxyFactory(
-            RestClient.Builder builder,
-            ExternalProperties prop,
-            ApplicationContext context) {
-
-        ConversionService conversionService = ConfigConversionServiceBuilder
-                .builder(prop)
-                .build();
-        UriBuilderFactory uriFactory = CustomUriBuilderFactory.newInstance()
-                .env(context.getEnvironment())
-                .conversionService(conversionService)
-                .uriTemplate(prop.getUrl())
-                .build();
-        HttpMessageConverter<Object> converter = ConfigMessageConveterBuilder
-                .builder(prop)
-                .build(context);
-
-        RestClient restClient = builder
-                .uriBuilderFactory(uriFactory)
-                .messageConverters(converters -> converters.addFirst(converter))
-                .requestInitializer(new BearerTokenRequestInitializer())
-                .defaultStatusHandler(new RestClientErrorHandler(new ErrorMessageDeserializer()))
-                .build();
-
-        RestClientAdapter adapter = RestClientAdapter.create(restClient);
-        return HttpServiceProxyFactory
-                .builderFor(adapter)
-                .conversionService(conversionService)
-                .build();
+    RmsRestClientCustomizer overrideRestClientConfig() {
+        return BearerTokenRequestInitializerCustomizer.INSTANCE;
     }
 
     @Bean
