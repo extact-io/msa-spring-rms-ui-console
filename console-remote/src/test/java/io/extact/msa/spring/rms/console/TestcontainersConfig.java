@@ -28,7 +28,7 @@ class TestcontainersConfig {
                 .withExposedService("rms-application-1", 8080) // コンテナ側のサービス名とポート
                 .waitingFor("rms-application-1", Wait.forHttp("/actuator/health/readiness")
                         .withStartupTimeout(Duration.ofSeconds(10)))
-                .withEnv("RMS_LOG_SERVER_ENABLE", "true");
+                .withEnv("ENV_OTLP_ENABLED", "false");
     }
 
     @Bean

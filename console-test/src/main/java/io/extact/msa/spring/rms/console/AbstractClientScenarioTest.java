@@ -83,7 +83,12 @@ abstract class AbstractClientScenarioTest {
         // 登録したユーザを再登録（重複エラー）
         // -----------------------------------
         // ★:ADMINに切り替え
-        loginService.login("admin", "admin");
+        try {
+            loginService.login("admin", "admin");
+        } catch (Exception e) {
+            // TODO 自動生成された catch ブロック
+            e.printStackTrace();
+        }
 
         // 名前が重複
         UserConsoleModel duplicateUser = UserConsoleModel.builder()
