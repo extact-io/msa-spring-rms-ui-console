@@ -1,18 +1,9 @@
-debug: false
-
 env:
   otlp:
     enabled: false # テストはOTELは無効なのを前提にしているためfalse固定すること
-
 spring:
   main:
     banner-mode: off
-
 rms:
-  debug:
-    configdump:
-      enable: false
-      #system-properties: on
-      #system-environment: on
   test:
     use-testcontainer: true
