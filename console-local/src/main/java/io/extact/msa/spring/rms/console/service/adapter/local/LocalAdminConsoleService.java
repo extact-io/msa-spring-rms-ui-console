@@ -2,7 +2,7 @@ package io.extact.msa.spring.rms.console.service.adapter.local;
 
 import java.util.List;
 
-import io.extact.msa.spring.platform.fw.domain.event.DomainEventPublisher;
+import io.extact.msa.spring.platform.fw.domain.service.DomainEventPublisher;
 import io.extact.msa.spring.rms.application.admin.ItemAddCommand;
 import io.extact.msa.spring.rms.application.admin.ItemAdminService;
 import io.extact.msa.spring.rms.application.admin.UserAddCommand;

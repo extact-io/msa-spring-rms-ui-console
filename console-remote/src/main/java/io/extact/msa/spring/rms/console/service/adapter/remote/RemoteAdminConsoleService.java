@@ -2,7 +2,7 @@ package io.extact.msa.spring.rms.console.service.adapter.remote;
 
 import java.util.List;
 
-import io.extact.msa.spring.platform.fw.domain.event.DomainEventPublisher;
+import io.extact.msa.spring.platform.fw.domain.service.DomainEventPublisher;
 import io.extact.msa.spring.rms.console.auth.UserUpdatedEvent;
 import io.extact.msa.spring.rms.console.service.AdminConsoleService;
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.ItemAddClientRequest;

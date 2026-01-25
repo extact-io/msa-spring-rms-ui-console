@@ -1,6 +1,6 @@
 package io.extact.msa.spring.rms.console.auth;
 
-import io.extact.msa.spring.platform.fw.domain.event.DomainEvent;
+import io.extact.msa.spring.platform.fw.domain.model.DomainEvent;
 import lombok.Builder;
 
 @Builder

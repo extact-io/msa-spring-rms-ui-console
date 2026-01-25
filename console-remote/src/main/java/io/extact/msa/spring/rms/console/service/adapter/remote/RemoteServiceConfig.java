@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
-import io.extact.msa.spring.platform.fw.domain.event.DomainEventPublisher;
+import io.extact.msa.spring.platform.fw.domain.service.DomainEventPublisher;
 import io.extact.msa.spring.platform.fw.feature.event.EventPublisherConfig;
 import io.extact.msa.spring.platform.fw.infrastructure.external.ExternalProperties;
 import io.extact.msa.spring.platform.fw.infrastructure.external.customizer.BearerTokenRequestInitializerCustomizer;

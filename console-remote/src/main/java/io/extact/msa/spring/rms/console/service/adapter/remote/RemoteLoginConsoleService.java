@@ -3,7 +3,7 @@ package io.extact.msa.spring.rms.console.service.adapter.remote;
 import org.springframework.http.ResponseEntity;
 
 import io.extact.msa.spring.platform.core.auth.client.BearerTokenExtractor;
-import io.extact.msa.spring.platform.fw.domain.event.DomainEventPublisher;
+import io.extact.msa.spring.platform.fw.domain.service.DomainEventPublisher;
 import io.extact.msa.spring.rms.console.auth.LoggedInEvent;
 import io.extact.msa.spring.rms.console.service.LoginConsoleService;
 import io.extact.msa.spring.rms.console.service.adapter.remote.client.LoginClientRequest;
