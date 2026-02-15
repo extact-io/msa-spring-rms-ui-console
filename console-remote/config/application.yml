@@ -15,4 +15,4 @@ rms:
       #system-properties: true
       #system-environment: true
   test:
-    use-testcontainer: false
+    use-testcontainer: true
